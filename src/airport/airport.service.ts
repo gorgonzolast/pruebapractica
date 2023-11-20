@@ -26,6 +26,9 @@ export class AirportService {
     }
     
     async create(airport: AirportEntity): Promise<AirportEntity> {
+        if (airport.airportCode.length > 3){
+            throw new BusinessLogicException("The airport's code should be of length 3", BusinessError.PRECONDITION_FAILED)
+        }
         return await this.airportRepository.save(airport);
     }
 

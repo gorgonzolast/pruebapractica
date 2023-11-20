@@ -64,7 +64,7 @@
 									"\r",
 									"pm.test(\"Get expected error message\", function () {\r",
 									"   var data = pm.response.json();\r",
-									"   pm.expect(data.message).to.eql(\"The airport's code should be of lenght 3\");\r",
+									"   pm.expect(data.message).to.eql(\"The airport's code should be of length 3\");\r",
 									"});"
 								],
 								"type": "text/javascript"
