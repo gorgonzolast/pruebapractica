@@ -5,14 +5,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AirlineModule } from './airline/airline.module';
 import { AirportModule } from './airport/airport.module';
-import { AirportAirlineModule } from './airport-airline/airport-airline.module';
 import { AirlineAirportModule } from './airline-airport/airline-airport.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AirlineEntity } from './airline/airline.entity';
 import { AirportEntity } from './airport/airport.entity';
 
 @Module({
-  imports: [AirlineModule, AirportModule, AirportAirlineModule, AirlineAirportModule,
+  imports: [AirlineModule, AirportModule, AirlineAirportModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
