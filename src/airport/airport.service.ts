@@ -33,6 +33,9 @@ export class AirportService {
     }
 
     async update(id: string, airport: AirportEntity): Promise<AirportEntity> {
+        if (airport.airportCode.length > 3){
+            throw new BusinessLogicException("The airport's code should be of length 3", BusinessError.PRECONDITION_FAILED)
+        }
         const persistedAirport: AirportEntity = await this.airportRepository.findOne({where:{id}});
         if (!persistedAirport)
             throw new BusinessLogicException("The airport with the given id was not found", BusinessError.NOT_FOUND);

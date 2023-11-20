@@ -82,10 +82,22 @@ describe('AirportService', () => {
     expect(airport.city).toEqual(storedAirport.city)
   });
 
+  it('create should throw an exception for an aiport with an invalid aiport code', async () => {
+    const airport: AirportEntity = {
+      id: "",
+      name: faker.airline.airport().name, 
+      airportCode: "ERTE", 
+      country: faker.location.country(), 
+      city: faker.location.city(),
+      airlines: []
+    }
+    await expect(() => service.create(airport)).rejects.toHaveProperty("message", "The airport's code should be of length 3")
+  });
+
   it('update should modify a airport', async () => {
     const airport: AirportEntity = airportsList[0];
     airport.name = "New name";
-    airport.airportCode = "New code";
+    airport.airportCode = "New";
   
     const updatedAirport: AirportEntity = await service.update(airport.id, airport);
     expect(updatedAirport).not.toBeNull();
@@ -99,9 +111,15 @@ describe('AirportService', () => {
   it('update should throw an exception for an invalid airport', async () => {
     let airport: AirportEntity = airportsList[0];
     airport = {
-      ...airport, name: "New name", airportCode: "New code"
+      ...airport, name: "New name", airportCode: "New"
     }
     await expect(() => service.update("0", airport)).rejects.toHaveProperty("message", "The airport with the given id was not found")
+  });
+
+  it('update should throw an exception for an airport with an invalid aiport code', async () => {
+    const airport: AirportEntity = airportsList[0];
+    airport.airportCode = "ERTE";
+    await expect(() => service.update(airport.id, airport)).rejects.toHaveProperty("message", "The airport's code should be of length 3")
   });
 
   it('delete should remove a airport', async () => {
