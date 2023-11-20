@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import { AirlineEntity } from "src/airline/airline.entity";
+import { AirlineEntity } from "../airline/airline.entity";
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -10,7 +10,7 @@ export class AirportEntity {
     @Column()
     name: string;
     @Column()
-    aiportCode: string;
+    airportCode: string;
     @Column()
     country: string;
     @Column()
